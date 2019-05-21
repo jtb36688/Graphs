@@ -28,11 +28,17 @@ class Graph:
                     queue.enqueue(next_vertex)
 
     def dft(self, starting_vertex):
-        """
-        Print each vertex in depth-first order
-        beginning from starting_vertex.
-        """
-        pass  # TODO
+        stack = Stack()
+        visited = set()
+        stack.push(starting_vertex)
+        while stack.size() > 0:
+            v = stack.pop()
+            if v not in visited:
+                print(v)
+                visited.add(v)
+                for next_vertex in self.vertices[v]:
+                    stack.push(next_vertex)
+                    
     def dft_recursive(self, starting_vertex):
         """
         Print each vertex in depth-first order

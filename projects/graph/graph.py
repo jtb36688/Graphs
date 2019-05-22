@@ -54,17 +54,23 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass
         queue = Queue()
+        queue.enqueue([starting_vertex])
         visited = set()
-        queue.enqueue(starting_vertex)
         while queue.size() > 0:
-            v = queue.dequeue()
-            if v not in visited:
-                print(v)
-                visited.add(v)
-                for next_vertex in self.vertices[v]:
-                    queue.enqueue(next_vertex)
+            path = queue.dequeue()
+            node = path[-1]
+            if node == destination_vertex:
+                return path
+            visited.add(node)
+            for next_node in self.vertices[node]:
+                # new_path = list(path)
+                new_path = path.copy()
+                new_path.append(next_node)
+                queue.enqueue(new_path)
+        return None
+
+
 
 
     def dfs(self, starting_vertex, destination_vertex):
@@ -73,7 +79,21 @@ class Graph:
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+        stack = Stack()
+        stack.push([starting_vertex])
+        visited = set()
+        while stack.size() > 0:
+            path = stack.pop()
+            node = path[-1]
+            if node == destination_vertex:
+                return path
+            visited.add(node)
+            for next_node in self.vertices[node]:
+                # new_path = list(path)
+                new_path = path.copy()
+                new_path.append(next_node)
+                stack.push(new_path)
+        return None
 
 
 
